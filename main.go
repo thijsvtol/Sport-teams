@@ -5,7 +5,16 @@ import (
 	"sport-teams/models"
 
 	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
+
+func prometheusHandler() gin.HandlerFunc {
+	h := promhttp.Handler()
+
+	return func(c *gin.Context) {
+		h.ServeHTTP(c.Writer, c.Request)
+	}
+}
 
 func main() {
 	r := gin.Default()
@@ -17,6 +26,8 @@ func main() {
 		c.Set("db", db)
 		c.Next()
 	})
+
+	r.GET("/metrics", prometheusHandler())
 
 	r.GET("/teams", controllers.FindTeams)
 
