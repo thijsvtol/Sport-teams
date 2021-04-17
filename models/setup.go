@@ -16,6 +16,7 @@ func SetupModels() *gorm.DB {
 	if err := viper.ReadInConfig(); err != nil {
 		fmt.Printf("Error reading config file, %s", err)
 	}
+
 	// viper package read .env
 	viper_user := viper.Get("POSTGRES_USER")
 	viper_password := viper.Get("POSTGRES_PASSWORD")
@@ -23,8 +24,13 @@ func SetupModels() *gorm.DB {
 	viper_host := viper.Get("POSTGRES_HOST")
 	viper_port := viper.Get("POSTGRES_PORT")
 
+	sslmode := "require"
+	if viper_host == "localhost" {
+		sslmode = "disable"
+	}
+
 	// https://gobyexample.com/string-formatting
-	prosgret_conname := fmt.Sprintf("host=%v port=%v user=%v dbname=%v password=%v sslmode=require", viper_host, viper_port, viper_user, viper_db, viper_password)
+	prosgret_conname := fmt.Sprintf("host=%v port=%v user=%v dbname=%v password=%v sslmode=%v", viper_host, viper_port, viper_user, viper_db, viper_password, sslmode)
 
 	fmt.Println("conname is\t\t", prosgret_conname)
 

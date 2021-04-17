@@ -27,17 +27,19 @@ func main() {
 		c.Next()
 	})
 
+	api := r.Group("/api")
+	{
+		teams := api.Group("/teams")
+		{
+			teams.GET("", controllers.FindTeams)
+			teams.POST("", controllers.CreateTeam)
+			teams.GET("/:id", controllers.FindTeam)
+			teams.PATCH("/:id", controllers.UpdateTeam)
+			teams.DELETE("/:id", controllers.DeleteTeam)
+		}
+	}
+
 	r.GET("/metrics", prometheusHandler())
-
-	r.GET("/teams", controllers.FindTeams)
-
-	r.POST("/teams", controllers.CreateTeam) // create
-
-	r.GET("/teams/:id", controllers.FindTeam) // find by id
-
-	r.PATCH("/teams/:id", controllers.UpdateTeam) // update by id
-
-	r.DELETE("/teams/:id", controllers.DeleteTeam) // delete by id
 
 	r.Run()
 }
