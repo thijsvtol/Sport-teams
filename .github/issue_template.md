@@ -1,15 +1,15 @@
-### Type of Pull Request
+### Type Of Issue
 [Place an '[x]' (no spaces) in all applicable fields.
 - [ ] Feature
-- [ ] Bugfix
+- [ ] Bug
 - [ ] Custom
 
-### Description of change
+### Description of issue
 
 [Type here]
 
 ### Checklist
 [Place an '[x]' (no spaces) in all applicable fields.
-- [ ] The branch title starts with a type (selected in the first header e.g. feature/my-feature)
-- [ ] Documentation is changed or added
-- [ ] Tests have been added
+- [ ] The issue title starts with a type (selected in the first header e.g. feature)
+- [ ] Documentation must be changed or added
+- [ ] Tests must be changed or added

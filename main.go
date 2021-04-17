@@ -41,5 +41,8 @@ func main() {
 
 	r.GET("/metrics", prometheusHandler())
 
-	r.Run()
+	err := r.Run()
+	if err != nil {
+		panic(err)
+	}
 }
