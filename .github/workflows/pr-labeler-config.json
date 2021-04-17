@@ -1,0 +1,182 @@
+{
+    "labels": {
+      "feature": {
+        "name": "feature",
+        "colour": "#2E09B4",
+        "description": "Feature"
+      },
+      "bugfix": {
+        "name": "bugfix",
+        "colour": "#d73a4a",
+        "description": "Bugfix in development"
+      },
+      "release": {
+        "name": "release",
+        "colour": "#FBCA04",
+        "description": "Release to master or main branch"
+      },
+      "testing": {
+        "name": "testing",
+        "colour": "#CB2A72",
+        "description": "Testing"
+      },
+      "documentation": {
+        "name": "documentation",
+        "colour": "#0075ca",
+        "description": "Improvements or additions to documentation"
+      },
+      "docker": {
+        "name": "docker",
+        "colour": "#45CF6E",
+        "description": "Docker file(s) changed"
+      },
+      "dependencies": {
+        "name": "dependencies",
+        "colour": "#472E45",
+        "description": "Dependencies changed"
+      },
+      "automation": {
+        "name": "automation",
+        "colour": "#DE9831",
+        "description": "Github workflows changed"
+      }
+    },
+    "pr": {
+      "feature": {
+        "requires": 1,
+        "conditions": [
+          {
+            "type": "branchMatches",
+            "pattern": "^feature"
+          },
+          {
+            "type": "titleMatches",
+            "pattern": "^feature"
+          },
+          {
+            "type": "branchMatches",
+            "pattern": "^Feature"
+          },
+          {
+            "type": "titleMatches",
+            "pattern": "^Feature"
+          }
+        ]
+      },
+      "bugfix": {
+        "requires": 1,
+        "conditions": [
+          {
+            "type": "branchMatches",
+            "pattern": "^bugfix"
+          },
+          {
+            "type": "branchMatches",
+            "pattern": "^bug"
+          },
+          {
+            "type": "titleMatches",
+            "pattern": "^bugfix"
+          },
+          {
+            "type": "titleMatches",
+            "pattern": "^bug"
+          },
+          {
+            "type": "branchMatches",
+            "pattern": "^Bugfix"
+          },
+          {
+            "type": "branchMatches",
+            "pattern": "^Bug"
+          },
+          {
+            "type": "titleMatches",
+            "pattern": "^Bugfix"
+          },
+          {
+            "type": "titleMatches",
+            "pattern": "^Bug"
+          }
+        ]
+      },
+      "release": {
+        "requires": 1,
+        "conditions": [
+          {
+            "type": "branchMatches",
+            "pattern": "develop"
+          }
+        ]
+      },
+      "testing": {
+        "requires": 1,
+        "conditions": [
+          {
+            "type": "filesMatch",
+            "glob": "test/**/*"
+          },
+          {
+            "type": "filesMatch",
+            "glob": "tests/**/*"
+          }
+        ]
+      },
+      "documentation": {
+        "requires": 1,
+        "conditions": [
+          {
+            "type": "filesMatch",
+            "glob": "README.md"
+          },
+          {
+            "type": "filesMatch",
+            "glob": "MIGRATION.md"
+          },
+          {
+            "type": "filesMatch",
+            "glob": "CONTRIBUTING.md"
+          }
+        ]
+      },
+      "docker": {
+        "requires": 1,
+        "conditions": [
+          {
+            "type": "filesMatch",
+            "glob": "Dockerfile"
+          },
+          {
+            "type": "filesMatch",
+            "glob": ".dockerignore"
+          }
+        ]
+      },
+      "dependencies": {
+        "requires": 1,
+        "conditions": [
+          {
+            "type": "filesMatch",
+            "glob": "package.json"
+          },
+          {
+            "type": "filesMatch",
+            "glob": "go.mod"
+          },
+          {
+            "type": "filesMatch",
+            "glob": "go.sum"
+          }
+        ]
+      },
+      "automation": {
+        "requires": 1,
+        "conditions": [
+          {
+            "type": "filesMatch",
+            "glob": ".github/**/*"
+          }
+        ]
+      }
+    }
+  }

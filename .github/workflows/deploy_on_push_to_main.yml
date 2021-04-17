@@ -1,0 +1,18 @@
+name: Deploy master branch
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: update branch protection
+        run: |
+          curl \
+          -X POST \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ secrets.DIGITAL_OCEAN_OAUTH }}" \
+          "https://api.digitalocean.com/v2/apps/${{ secrets.DIGITAL_OCEAN_APP_ID }}/deployments"
