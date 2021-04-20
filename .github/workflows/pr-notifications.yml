@@ -1,0 +1,20 @@
+name: Pull Request Notifications
+on:
+  pull_request:
+    types: [opened, edited, reopened, synchronize, ready_for_review]
+
+jobs:
+  notify-ms-teams:
+    runs-on: ubuntu-latest
+    name: Notify MS Teams
+    steps:
+      - run: echo "REPO_NAME=${GITHUB_REPOSITORY}" >> $GITHUB_ENV
+      - name: Send message to Microsoft Teams
+        if: github.event_name == 'pull_request' && github.event.action == 'opened'
+        uses: aliencube/microsoft-teams-actions@v0.8.0
+        with:
+          webhook_uri: ${{ secrets.TEAMS_WEBHOOK }}
+          title: Opened PR in ${{ env.REPO_NAME }} nr.${{ github.event.pull_request.number }}
+          text: ${{ github.event.pull_request.title }}
+          sections: '[{ "activityTitle": "This PR is opened by [${{ github.event.pull_request.user.login }}](${{ github.event.pull_request.user.html_url }})" }]'
+          actions: '[{ "@type": "OpenUri", "name": "View Pull Request", "targets": [{ "os": "default", "uri": "${{ github.event.pull_request.html_url }}" }] }]'
