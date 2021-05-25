@@ -5,5 +5,3 @@
 2. Get deps `go mod download`
 
 3. Time to run! `go run main.go`
-
-TEST
